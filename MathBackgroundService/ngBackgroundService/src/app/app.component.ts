@@ -123,6 +123,21 @@ export class AppComponent {
       });
     });
 
+    this.hubConnection.on('gagne', () => {
+      this.zone.run(() => {
+        this.nbRightAnswers++;
+      alert("Bonne réponse !");
+      });
+    });
+
+    this.hubConnection.on('perdu', (data) => {
+      this.zone.run(() => {
+        this.nbRightAnswers--;
+        let bonneReponse = data
+      alert("Mauvaise réponse ! La bonne réponse était "+ bonneReponse);
+      });
+    });
+
     this.hubConnection
       .start()
       .then(() => {
